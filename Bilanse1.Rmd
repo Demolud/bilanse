@@ -1,0 +1,166 @@
+---
+title: "Czy można zlikwidować dług publiczny?"
+author: "Iwo Augustyński"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem bilansów sektorowych
+
+
+Krótkie wyjaśnienie:
+
+1. Każda forma oszczędności jest długiem kogoś innego (gotówka jest zobowiązaniem banku centralnego).
+
+2. Jeśli oszczędności gospodarstw domowych są większe niż ich długi, to ta nadwyżka może być trzymana w formie długu przedsiębiorstw (w tym banków), państwa lub zagranicy. **Innej opcji nie ma**.
+
+3. Jeśli jednak przedsiębiorstwa również generują oszczędności netto lub ich potrzeby inwestycyjne nie są w stanie wchłonąć całych oszczędności gospodarstw domowych, to zostaje tylko dług państwa i zagranicy jako forma lokaty oszczędności.
+
+4. Poza rzadkimi wyjątkami państwa rozwinięte generują nadwyżkę oszczędności sektora prywatnego (gosp. domowe + firmy (w tym banki)).
+
+5. W takiej sytuacji formą lokaty może być jedynie dług publiczny lub zagraniczny.
+
+6. Lokata w formie długu zagranicznego powstaje, gdy państwo więcej eksportuje niż importuje (dodatni bilans handlowy/ nadwyżka eksportu netto). Wtedy zagranica płaci za towary swoim długiem (waluta to też forma długu publicznego).
+
+7. Jeśli dany kraj posiada zerowy bilans handlowy, to całe oszczędności sektora prywatnego **muszą** mieć formę długu publicznego.
+
+8. Jeśli dany kraj posiada ujemny bilans handlowy, to dług publiczny **musi** "pokryć" oszczędności krajowe oraz sfinansować nadwyżkę zakupów zagranicznych nad sprzedażą produktów/usług krajowych za granicę.
+
+
+**To wszystko wynika z działań matematycznych/księgowych a nie takiej czy innej teorii ekonomicznej.**
+
+</br>
+Poniżej możecie zweryfikować te informacje.
+</br>
+</br>
+</br>
+```{r, echo = FALSE}
+shinyApp(
+     ui <- fluidPage(
+
+   fluidRow( column (1), column (11,
+         selectInput("bins",
+                     "   Wybór kraju",
+                     choices = list("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EA","EA12",
+                                    "EA19", "EE", "EL", "ES", "EU15", "EU28", "FI", "FR",
+                                    "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MK", "NL",
+                                    "NO", "PL", "PT", "RO", "RS", "SE", "SI", "SK", "UK"),
+                     selected = "EU28")
+      )),
+      
+      # Show a plot of the generated distribution
+      fluidRow(
+         plotOutput("distPlot")
+      )
+   ),
+
+server <- function(input, output) {
+library(eurostat)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggthemes)
+
+gdp<-get_eurostat("nama_10_gdp") %>% 
+     filter(time >= "2002-01-01") %>%
+     filter(time <= "2016-01-01") %>%
+     filter(unit=="CP_MNAC") %>%
+     subset(.,na_item %in% c("P3_S13", "P31_S14_S15", "P51G", "P52_P53",
+                             "P6", "P7", "D1", "B2A3G", "D2X3")) %>%
+     select(geo, time, na_item, values)
+
+#SP=D1+B2A3G
+#I=P51G+P52_P53
+#G=P3_S13
+#T=D2X3
+#E=P6
+#Im=P7
+#
+#(SP-I)=(G-T)+(E-IM)
+
+tmp<-spread(gdp,na_item, values) %>%
+     mutate (.,SP=D1+B2A3G-P31_S14_S15) %>%
+     mutate (.,I=P51G+P52_P53) %>%
+     mutate (., dSP=SP-I) %>%
+     mutate (., dG=P3_S13-D2X3) %>%
+     mutate (., dE=P6-P7) %>%
+     mutate (., ver=dSP-(dG+dE))
+
+res<-select(tmp, geo, time, dSP, dG, dE, ver)
+# Define server logic required to draw a histogram
+
+     
+   output$distPlot <- renderPlot({
+      # generate bins based on input$bins from ui.R
+        x<-filter(res, geo==input$bins)
+        x$dG<--x$dG
+        x$dE<--x$dE
+        x1<-gather(x, na_item, values, 3:5)
+        x1$na_item<-factor(x1$na_item, levels = c("dSP", "dG", "dE"), labels = c("prywatnego", "publicznego", "zagranicy"))
+        
+      
+        ggplot(x1, aes(x = time, y = values, group = na_item)) +
+             geom_col(aes(fill = na_item), position = "stack") +
+             theme_hc() + scale_fill_brewer(palette="Set2") +
+             scale_y_continuous(labels=function(x)x/1000) +
+             labs(fill = "Bilans sektora: ") + ylab("mld") + xlab("rok") +
+             ggtitle (levels(x1$geo)[as.numeric(as.character(x1[1,1]))])
+   })
+},
+options = list(height = 500)
+)
+
+```
+
+
+Źródło danych: Eurostat (nama_10_gdp)
+</br>
+</br>
+Ujemny bilans zagranicy na wykresie ma charakter finansowy, "pieniężny". Oznacza nadwyżkę eksportu nad importem danego kraju. Zagranica bierze towary i usługi "na kreskę" czyli zwiększając swój dług. Kraj gromadzi go w formie np. rezerw walutowych w banku centralnym. W ten sposób część oszczędności krajowych ma formę długu zagranicznego i może zastępować dług krajowy. 
+Nadwyżka w handlu zagranicznym umożliwa zatem redukcję długu publicznego (zobacz przykład Irlandii - IE) ale kosztem większej podatności na ryzyka globalne (ryzyko kursowe, ryzyko polityczne w krajach partnerskich itp.)
+</br>
+</br>
+
+###Aneks rachunkowy
+
+</br>
+Zgodnie z systemem rachunków narodowych PKB [(ESA2010)](http://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5526/5/1/3/esa2010_pl.pdf) jest obliczane na trzy sposoby. 
+
+1. Od strony wydatkowej:
+
+       |      |
+-------- |--------
+**PKB**  | = **C** konsumpcja 
+        <br> | + **G** wydatki publiczne
+       <br>  | + **I** inwestycje w kapitał trwały
+        <br> | + **I** zmiana zapasów
+        <br> | + **E** eksport
+        <br> | - **Im** import
+        <br> | <br>
+
+2. Od strony dochodowej:
+
+       |      |
+-------- |--------|
+**PKB** | = **D** dochody z pracy |
+      <br>  | + **A** zatrzymane zyski przedsiębiorstw (nadwyżka operacyjna brutto) |
+      <br>  | + **T** podatki od produkcji i importu |
+
+</br>
+Oba podejścia muszą dać taki sam wynik co można zapisać następująco:
+
+**D + A + T = C + G + I + E - Im**     co po przekształceniu daje
+
+**(D + A) - (C + I) = (G - T) + (E - Im)** czyli
+
+dochody - wydatki sektora prywatnego = (dochody - wydatki sektora publicznego) + (wydatki - dochody sektora zagranicy)
+
+Dla przypomnienia - eksport z danego kraju oznacza, że zagranica kupuje, czyli jest to jej wydatek. Import do danego kraju oznacza natomiast, że zagranica sprzedaje, dlatego jest to jej dochód.
+
+</br>
+</br>
+</br>
