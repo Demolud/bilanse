@@ -14,7 +14,7 @@ ui <- fluidPage(
    
    # Application title
      fluidPage(
-          includeMarkdown("Bilanse.rmd")
+          includeMarkdown("Bilanse.Rmd")
      ),
 
    fluidRow( column (1), column (11,
@@ -32,7 +32,7 @@ ui <- fluidPage(
          plotOutput("distPlot")
       ),
    fluidPage(
-        includeMarkdown("Bilanse-aneks.rmd")
+        includeMarkdown("Bilanse-aneks.Rmd")
    )
    )
 
