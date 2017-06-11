@@ -13,7 +13,9 @@ library(shiny)
 ui <- fluidPage(
    
    # Application title
-
+     fluidPage(
+          includeMarkdown("Bilanse.rmd")
+     ),
 
    fluidRow( column (1), column (11,
          selectInput("bins",
@@ -28,7 +30,10 @@ ui <- fluidPage(
       # Show a plot of the generated distribution
       fluidRow(
          plotOutput("distPlot")
-      )
+      ),
+   fluidPage(
+        includeMarkdown("Bilanse-aneks.rmd")
+   )
    )
 
 
