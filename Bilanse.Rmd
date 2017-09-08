@@ -3,15 +3,11 @@ title: "Czy można zlikwidować dług publiczny?"
 author: "Iwo Augustyński"
 date: "31 maja 2017"
 output: html_document
-runtime: shiny
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Problem bilansów sektorowych
-
+# Problem bilansów sektorowych
+</br>
+</br>
 
 Krótkie wyjaśnienie:
 
@@ -39,25 +35,3 @@ Poniżej możecie zweryfikować te informacje.
 </br>
 </br>
 </br>
-
-
-
-```{r, echo=FALSE}
-shinyAppFile(
-  "app.R",
-  options = list(
-    width = "100%", height = 550
-  )
-)
-```
-
-Źródło danych: Eurostat (nama_10_gdp)
-</br>
-</br>
-Ujemny bilans zagranicy na wykresie ma charakter finansowy, "pieniężny". Oznacza nadwyżkę eksportu nad importem danego kraju. Zagranica bierze towary i usługi "na kreskę" czyli zwiększając swój dług. Kraj gromadzi go w formie np. rezerw walutowych w banku centralnym. W ten sposób część oszczędności krajowych ma formę długu zagranicznego i może zastępować dług krajowy. 
-Nadwyżka w handlu zagranicznym umożliwa zatem redukcję długu publicznego (zobacz przykład Irlandii - IE) ale kosztem większej podatności na ryzyka globalne (ryzyko kursowe, ryzyko polityczne w krajach partnerskich itp.)
-</br>
-</br>
-
-
-

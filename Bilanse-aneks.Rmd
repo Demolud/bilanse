@@ -13,7 +13,7 @@ Nadwyżka w handlu zagranicznym umożliwa zatem redukcję długu publicznego (zo
 </br>
 </br>
 
-###Aneks rachunkowy
+### Aneks rachunkowy
 
 </br>
 Zgodnie z systemem rachunków narodowych PKB [(ESA2010)](http://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5526/5/1/3/esa2010_pl.pdf) jest obliczane na trzy sposoby. 
