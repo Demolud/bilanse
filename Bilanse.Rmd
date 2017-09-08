@@ -1,0 +1,37 @@
+---
+title: "Czy można zlikwidować dług publiczny?"
+author: "Iwo Augustyński"
+date: "31 maja 2017"
+output: html_document
+---
+
+# Problem bilansów sektorowych
+</br>
+</br>
+
+Krótkie wyjaśnienie:
+
+1. Każda forma oszczędności jest długiem kogoś innego (gotówka jest zobowiązaniem banku centralnego).
+
+2. Jeśli oszczędności gospodarstw domowych są większe niż ich długi, to ta nadwyżka może być trzymana w formie długu przedsiębiorstw (w tym banków), państwa lub zagranicy. **Innej opcji nie ma**.
+
+3. Jeśli jednak przedsiębiorstwa również generują oszczędności netto lub ich potrzeby inwestycyjne nie są w stanie wchłonąć całych oszczędności gospodarstw domowych, to zostaje tylko dług państwa i zagranicy jako forma lokaty oszczędności.
+
+4. Poza rzadkimi wyjątkami państwa rozwinięte generują nadwyżkę oszczędności sektora prywatnego (gosp. domowe + firmy (w tym banki)).
+
+5. W takiej sytuacji formą lokaty może być jedynie dług publiczny lub zagraniczny.
+
+6. Lokata w formie długu zagranicznego powstaje, gdy państwo więcej eksportuje niż importuje (dodatni bilans handlowy/ nadwyżka eksportu netto). Wtedy zagranica płaci za towary swoim długiem (waluta to też forma długu publicznego).
+
+7. Jeśli dany kraj posiada zerowy bilans handlowy, to całe oszczędności sektora prywatnego **muszą** mieć formę długu publicznego.
+
+8. Jeśli dany kraj posiada ujemny bilans handlowy, to dług publiczny **musi** "pokryć" oszczędności krajowe oraz sfinansować nadwyżkę zakupów zagranicznych nad sprzedażą produktów/usług krajowych za granicę.
+
+
+**To wszystko wynika z działań matematycznych/księgowych a nie takiej czy innej teorii ekonomicznej.**
+
+</br>
+Poniżej możecie zweryfikować te informacje.
+</br>
+</br>
+</br>
