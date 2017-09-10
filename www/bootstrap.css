@@ -1091,8 +1091,9 @@ body {
   line-height: 1.42857143;
   color: #777777;
   background-color: #fcfcfc;
-margin-left: 100px;
-margin-right: 100px;
+margin-left: 5%;
+margin-right: 5%;
+margin-top: 5%;
 }
 input,
 button,
