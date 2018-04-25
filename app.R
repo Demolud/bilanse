@@ -56,9 +56,11 @@ countries <- cbind(c("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EA",
                     )
 colnames(countries) <- c("geo", "geo1")
 
+rok<- paste0(format(Sys.Date(), "%Y"),"-01-01")
+     
 gdp<-get_eurostat("nama_10_gdp") %>% 
      filter(time >= "2002-01-01") %>%
-     filter(time <= "2016-01-01") %>%
+     filter(time <= rok) %>%
      filter(unit=="CP_MNAC") %>%
      subset(.,na_item %in% c("P3_S13", "P31_S14_S15", "P51G", "P52_P53",
                              "P6", "P7", "D1", "B2A3G", "D2X3")) %>%
