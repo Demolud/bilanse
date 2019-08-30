@@ -1,22 +1,16 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+
 
 library(shiny)
 
 # Define UI for application
 ui <- fluidPage(theme = "bootstrap.css",
      
-     # Application title
+## Pierwsza czesc opisu    
      fluidPage(
-          includeMarkdown("Bilanse.Rmd")
+          includeMarkdown("Bilanse.Rmd") 
      ),
-     
+#######################
+
      fluidRow( column (1), column (11,
                                    selectInput("bins",
                                                "   Wybór kraju",
@@ -32,9 +26,11 @@ ui <- fluidPage(theme = "bootstrap.css",
      fluidRow(
           plotOutput("distPlot")
      ),
+## Druga czesc opisu
      fluidPage(
           includeMarkdown("Bilanse-aneks.Rmd")
      )
+#######################
 )
 
 
@@ -43,6 +39,8 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(ggthemes)
+
+## Tlumaczenie skrotow krajow z ang. na polski
 
 countries <- cbind(c("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EA",
                 "EE", "EL", "ES", "EU15", "EU28", "FI", "FR",
@@ -56,15 +54,20 @@ countries <- cbind(c("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EA",
                     )
 colnames(countries) <- c("geo", "geo1")
 
+rok<- paste0(format(Sys.Date(), "%Y"),"-01-01") # potrzebne do aktualizacji danych
+
+## pobieranie danych     
 gdp<-get_eurostat("nama_10_gdp") %>% 
      filter(time >= "2002-01-01") %>%
-     filter(time <= "2016-01-01") %>%
+     filter(time <= rok) %>%  # zapewnia pobieranie najnowszych danych
      filter(unit=="CP_MNAC") %>%
      subset(.,na_item %in% c("P3_S13", "P31_S14_S15", "P51G", "P52_P53",
                              "P6", "P7", "D1", "B2A3G", "D2X3")) %>%
      select(geo, time, na_item, values)
 gdp<-right_join(gdp, as.data.frame(countries))
 gdp$geo<-as.factor(gdp$geo)
+
+### Obliczanie bilansow sektorowych ################
 #SP=D1+B2A3G
 #I=P51G+P52_P53
 #G=P3_S13
@@ -78,19 +81,20 @@ tmp<-spread(gdp,na_item, values) %>%
      mutate (.,SP=D1+B2A3G-P31_S14_S15) %>%
      mutate (.,I=P51G+P52_P53) %>%
      mutate (., dSP=SP-I) %>%
-     mutate (., dG=P3_S13-D2X3) %>%
-     mutate (., dE=P6-P7) %>%
+     mutate (., dG=-(P3_S13-D2X3)) %>%
+     mutate (., dE=-(P6-P7)) %>%
      mutate (., ver=dSP-(dG+dE))
 
-res<-select(tmp, geo1, time, dSP, dG, dE, ver)
+##################
+
+res<-select(tmp, geo1, time, dSP, dG, dE, ver) # dataframe z panstwami i bilansami
+
+
 # Define server logic required to draw a graph
 server <- function(input, output) {
      
      output$distPlot <- renderPlot({
-          # generate bins based on input$bins from ui.R
           x<-filter(res, geo1==input$bins)
-          x$dG<--x$dG
-          x$dE<--x$dE
           x1<-gather(x, na_item, values, 3:5)
           x1$na_item<-factor(x1$na_item, levels = c("dSP", "dG", "dE"), labels = c("prywatnego", "publicznego", "zagranicy"))
           
