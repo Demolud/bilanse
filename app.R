@@ -56,39 +56,50 @@ colnames(countries) <- c("geo", "geo1")
 
 rok<- paste0(format(Sys.Date(), "%Y"),"-01-01") # potrzebne do aktualizacji danych
 
-## pobieranie danych     
-gdp<-get_eurostat("nama_10_gdp") %>% 
-     filter(time >= "2002-01-01") %>%
-     filter(time <= rok) %>%  # zapewnia pobieranie najnowszych danych
-     filter(unit=="CP_MNAC") %>%
-     subset(.,na_item %in% c("P3_S13", "P31_S14_S15", "P51G", "P52_P53",
-                             "P6", "P7", "D1", "B2A3G", "D2X3")) %>%
-     select(geo, time, na_item, values)
-gdp<-right_join(gdp, as.data.frame(countries))
-gdp$geo<-as.factor(gdp$geo)
+## pobieranie danych  
+load("data.Rdata")
+aktualny <- paste0(format(Sys.Date(), "%Y"),"-01-01") %>% as.Date(.)
+stary <- as.Date(res$rok[1])
 
-### Obliczanie bilansow sektorowych ################
-#SP=D1+B2A3G
-#I=P51G+P52_P53
-#G=P3_S13
-#T=D2X3
-#E=P6
-#Im=P7
-#
-#(SP-I)=(G-T)+(E-IM)
-
-tmp<-spread(gdp,na_item, values) %>%
-     mutate (.,SP=D1+B2A3G-P31_S14_S15) %>%
-     mutate (.,I=P51G+P52_P53) %>%
-     mutate (., dSP=SP-I) %>%
-     mutate (., dG=-(P3_S13-D2X3)) %>%
-     mutate (., dE=-(P6-P7)) %>%
-     mutate (., ver=dSP-(dG+dE))
-
-##################
-
-res<-select(tmp, geo1, time, dSP, dG, dE, ver) # dataframe z panstwami i bilansami
-
+if (aktualny-stary>91) {
+     gdp<-get_eurostat("nama_10_gdp") %>% 
+          filter(time >= "2002-01-01") %>%
+          filter(time <= rok) %>%  # zapewnia pobieranie najnowszych danych
+          filter(unit=="CP_MNAC") %>%
+          subset(.,na_item %in% c("P3_S13", "P31_S14_S15", "P51G", "P52_P53",
+                                  "P6", "P7", "D1", "B2A3G", "D2X3")) %>%
+          select(geo, time, na_item, values)
+     gdp<-right_join(gdp, as.data.frame(countries))
+     gdp$geo<-as.factor(gdp$geo)
+     
+     ### Obliczanie bilansow sektorowych ################
+     #SP=D1+B2A3G
+     #I=P51G+P52_P53
+     #G=P3_S13
+     #T=D2X3
+     #E=P6
+     #Im=P7
+     #
+     #(SP-I)=(G-T)+(E-IM)
+     
+     tmp<-spread(gdp,na_item, values) %>%
+          mutate (.,SP=D1+B2A3G-P31_S14_S15) %>%
+          mutate (.,I=P51G+P52_P53) %>%
+          mutate (., dSP=SP-I) %>%
+          mutate (., dG=-(P3_S13-D2X3)) %>%
+          mutate (., dE=-(P6-P7)) %>%
+          mutate (., ver=dSP-(dG+dE))
+     
+     ##################
+     
+     res<-select(tmp, geo1, time, dSP, dG, dE, ver) # dataframe z panstwami i bilansami
+     res$rok <- paste0(format(Sys.Date(), "%Y"),"-01-01")
+     
+     save(res, file = "data.RData")
+} else {
+     load("data.Rdata")
+     res <- select(res, -rok)
+}
 
 # Define server logic required to draw a graph
 server <- function(input, output) {
