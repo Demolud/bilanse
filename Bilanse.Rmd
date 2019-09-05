@@ -6,11 +6,20 @@ output: html_document
 ---
 
 # Problem bilansów sektorowych
+<br>
+Problem wielkości i konsekwencji wzrostu długu publicznego jest chyba jednym z najczęściej
+dyskutowanych zagadnień ekonomicznych. Co roku choćby paliwa do kolejnych komentarzy dolewają
+informacje o planowanym na kolejny rok budżecie państwa. 
 
-<!-- Tutaj powinno być jakieś intro chyba, bo jest skok na
-głęboką wodę --->
+Wydaje się, że generalnie panuje zgoda co do szkodliwości deficytu i długu publicznego (w końcu 
+jest o tym nawet wzmianka w konstytucji) a dyskusje dotyczą raczej skali szkód.
 
-Krótkie wyjaśnienie:
+Jak jednak udowadniam poniżej jest to pogląd błędny.
+
+
+<br>
+
+Krótkie wyjaśnienie podstawowych faktów:
 
 1. Każda forma oszczędności jest zobowiązaniem ('długiem')
 kogoś innego. Gdy gospodarstwo domowe oszczędza kupując
@@ -22,19 +31,23 @@ bankowego. Gdy 'trzyma gotówkę' (PLN) --- nabywa
 zobowiązania banku centralnego. Gdy 'trzyma dolary' ---
 nabywa zobowiązania USA.
 
-2. Jeśli oszczędności gospodarstw domowych są większe niż
+2. Oszczędzanie poprzez zakup złota, nieruchomości, zabytkowych aut, znaczków
+itp. itd. są traktowane jako inwestycje i oznaczają wydatki sektora prywatnego (realizowane
+głównie wewnątrz tego sektora, ale również dotyczące zagranicy - import dzieł sztuki, lub państwa - prywatyzacja).
+
+3. Jeśli oszczędności gospodarstw domowych są większe niż
 ich długi, to ta nadwyżka może być trzymana w formie długu
 przedsiębiorstw (w tym banków), państwa lub zagranicy. Innej
 opcji nie ma.
 
-3. To samo tyczy się innych sektorów. Jeśli przedsiębiorstwa
+4. To samo tyczy się innych sektorów. Jeśli przedsiębiorstwa
 generują oszczędności netto (lub ich potrzeby inwestycyjne
 nie są w stanie wchłonąć całych oszczędności gospodarstw
 domowych), to znaczy że muszą nabyć czyjeś
 zobowiązania. Jest kilka opcji --- zobowiązania gospodarstw
 domowych, państwa lub zagranicy.
 
-4. W państwach rozwiniętych sektor prywatny (gospodarstwa
+5. W państwach rozwiniętych sektor prywatny (gospodarstwa
 domowe + przedsiębiorstwa, w tym banki) osiąga zazwyczaj
 nadwyżkę oszczędności. W jaki sposób ulokować te nadwyżki?
 Są dwie opcje --- dług publiczny lub zagraniczny.
@@ -57,6 +70,8 @@ formę długu publicznego.
 8. Jeśli dany kraj posiada ujemny bilans handlowy, to dług
 publiczny nie tylko musi 'pokryć' oszczędności sektora
 prywatnego, ale rówież sfinansować deficyt handlowy.
+
+<br>
 
 To wszystko wynika z działań matematycznych/księgowych a nie
 takiej czy innej teorii ekonomicznej.
