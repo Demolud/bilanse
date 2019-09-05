@@ -6,32 +6,59 @@ output: html_document
 ---
 
 # Problem bilansów sektorowych
-</br>
-</br>
+
+<!-- Tutaj powinno być jakieś intro chyba, bo jest skok na
+głęboką wodę --->
 
 Krótkie wyjaśnienie:
 
-1. Każda forma oszczędności jest długiem kogoś innego (gotówka jest zobowiązaniem banku centralnego).
+1. Każda forma oszczędności jest zobowiązaniem ('długiem')
+kogoś innego. Gdy gospodarstwo domowe oszczędza kupując
+obligacje skarbowe --- nabywa dług państwa. Gdy oszczędza
+kupując akcje na Giełdzie Papierów Wartościowych --- nabywa
+zobowiązania sektora prywatnego (np. PKN Orlen). Gdy
+oszczędza 'na koncie' --- nabywa zobowiązania sektora
+bankowego. Gdy 'trzyma gotówkę' (PLN) --- nabywa
+zobowiązania banku centralnego. Gdy 'trzyma dolary' ---
+nabywa zobowiązania USA.
 
-2. Jeśli oszczędności gospodarstw domowych są większe niż ich długi, to ta nadwyżka może być trzymana w formie długu przedsiębiorstw (w tym banków), państwa lub zagranicy. **Innej opcji nie ma**.
+2. Jeśli oszczędności gospodarstw domowych są większe niż
+ich długi, to ta nadwyżka może być trzymana w formie długu
+przedsiębiorstw (w tym banków), państwa lub zagranicy. Innej
+opcji nie ma.
 
-3. Jeśli jednak przedsiębiorstwa również generują oszczędności netto lub ich potrzeby inwestycyjne nie są w stanie wchłonąć całych oszczędności gospodarstw domowych, to zostaje tylko dług państwa i zagranicy jako forma lokaty oszczędności.
+3. To samo tyczy się innych sektorów. Jeśli przedsiębiorstwa
+generują oszczędności netto (lub ich potrzeby inwestycyjne
+nie są w stanie wchłonąć całych oszczędności gospodarstw
+domowych), to znaczy że muszą nabyć czyjeś
+zobowiązania. Jest kilka opcji --- zobowiązania gospodarstw
+domowych, państwa lub zagranicy.
 
-4. Poza rzadkimi wyjątkami państwa rozwinięte generują nadwyżkę oszczędności sektora prywatnego (gosp. domowe + firmy (w tym banki)).
+4. W państwach rozwiniętych sektor prywatny (gospodarstwa
+domowe + przedsiębiorstwa, w tym banki) osiąga zazwyczaj
+nadwyżkę oszczędności. W jaki sposób ulokować te nadwyżki?
+Są dwie opcje --- dług publiczny lub zagraniczny.
 
-5. W takiej sytuacji formą lokaty może być jedynie dług publiczny lub zagraniczny.
+6. Co to jest dług zagraniczny? Aby powstał zagranica (inne
+państwa razem wzięte) musi go najpierw wyemitować. Kiedy ma
+to miejsce? Odpowiedź jest prosta --- gdy inne państwa muszą
+zadłużyć się aby kupić 'od nas' więcej, niż w danej chwili
+sprzedają 'nam', tj. gdy mamy tzw. dodatnie saldo bilansu
+handlowego. Innymi słowy, aby sektor prywatny 'gromadził'
+dług zagranicy, gospodarka musi więcej eksportować niż
+importować.
 
-6. Lokata w formie długu zagranicznego powstaje, gdy państwo więcej eksportuje niż importuje (dodatni bilans handlowy/ nadwyżka eksportu netto). Wtedy zagranica płaci za towary swoim długiem (waluta to też forma długu publicznego).
+7. Co w sytuacji gdy eksport jest równy importowi? Jeśli
+sektor prywatny nadal chce oszczędzać, zostaje mu jedna
+opcja --- musi nabywać zobowiązania państwa
+(tzw. obligacje). Nadwyżka sektora prywatnego przyjmuje
+formę długu publicznego.
 
-7. Jeśli dany kraj posiada zerowy bilans handlowy, to całe oszczędności sektora prywatnego **muszą** mieć formę długu publicznego.
+8. Jeśli dany kraj posiada ujemny bilans handlowy, to dług
+publiczny nie tylko musi 'pokryć' oszczędności sektora
+prywatnego, ale rówież sfinansować deficyt handlowy.
 
-8. Jeśli dany kraj posiada ujemny bilans handlowy, to dług publiczny **musi** "pokryć" oszczędności krajowe oraz sfinansować nadwyżkę zakupów zagranicznych nad sprzedażą produktów/usług krajowych za granicę.
+To wszystko wynika z działań matematycznych/księgowych a nie
+takiej czy innej teorii ekonomicznej.
 
-
-**To wszystko wynika z działań matematycznych/księgowych a nie takiej czy innej teorii ekonomicznej.**
-
-</br>
 Poniżej możecie zweryfikować te informacje.
-</br>
-</br>
-</br>
