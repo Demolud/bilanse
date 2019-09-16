@@ -60,6 +60,7 @@ rok<- paste0(format(Sys.Date(), "%Y"),"-01-01") # potrzebne do aktualizacji dany
 res <- read.csv("data.csv", fileEncoding = "UTF-8")
 res$time <- as.Date(res$time)
 res$rok <- as.Date(res$rok)
+res <- select(res, -X)
 #load("data.RData")
 aktualny <- Sys.Date()
 stary <- as.Date(res$rok[1])
@@ -105,7 +106,7 @@ if (aktualny-stary>91) {
      res <- read.csv("data.csv", fileEncoding = "UTF-8")
      res$time <- as.Date(res$time)
      res$rok <- as.Date(res$rok)
-     res <- select(res, -rok)
+     res <- select(res, -X, -rok)
 }
 
 # Define server logic required to draw a graph
@@ -122,7 +123,7 @@ server <- function(input, output) {
                theme_hc() + scale_fill_brewer(palette="Set2") +
                scale_y_continuous(labels=function(x)x/1000) +
                labs(fill = "Bilans sektora: ") + ylab("mld") + xlab("rok") +
-               ggtitle (levels(x1$geo1)[as.numeric(as.character(x1[1,1]))]) +
+               ggtitle (x1$geo1) +
                theme(plot.background = element_rect(fill = "#fcfcfc"),
                      legend.background = element_rect(fill = "#fcfcfc"))
      })
