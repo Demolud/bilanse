@@ -56,8 +56,11 @@ colnames(countries) <- c("geo", "geo1")
 
 rok<- paste0(format(Sys.Date(), "%Y"),"-01-01") # potrzebne do aktualizacji danych
 
-## pobieranie danych  
-load("data.RData")
+## pobieranie danych 
+res <- read.csv("data.csv", fileEncoding = "UTF-8")
+res$time <- as.Date(res$time)
+res$rok <- as.Date(res$rok)
+#load("data.RData")
 aktualny <- Sys.Date()
 stary <- as.Date(res$rok[1])
 
@@ -95,9 +98,13 @@ if (aktualny-stary>91) {
      res<-select(tmp, geo1, time, dSP, dG, dE, ver) # dataframe z panstwami i bilansami
      res$rok <- Sys.Date()
      
-     save(res, file = "data.RData")
+     write.csv(res, file = "data.csv", fileEncoding = "UTF-8")
+     #save(res, file = "data.RData")
 } else {
-     load("data.RData")
+     #load("data.RData")
+     res <- read.csv("data.csv", fileEncoding = "UTF-8")
+     res$time <- as.Date(res$time)
+     res$rok <- as.Date(res$rok)
      res <- select(res, -rok)
 }
 
